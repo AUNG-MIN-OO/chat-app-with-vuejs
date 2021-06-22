@@ -35,10 +35,16 @@ export default {
     text-align: center;
     padding: 20px 0;
 }
+.welcome hr{
+    width: 50%;
+}
 h1{
     text-align: center;
     text-transform: uppercase;
     margin: 30px auto;
+}
+.welcome h2{
+    margin: 0;
 }
 .welcome form{
     width: 400px;
@@ -50,7 +56,7 @@ h1{
 }
 .welcome input{
     display: block;
-    padding: 10px;
+    padding: 10px 0;
     width: 100%;
     margin-bottom: 20px;
     border: none;
@@ -58,6 +64,7 @@ h1{
     border-radius: 5px;
     color: #581b98;
     font-size: 16px;
+    padding-left: 10px;
 }
 .welcome input:focus-visible{
     outline: none;
