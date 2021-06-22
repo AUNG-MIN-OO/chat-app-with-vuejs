@@ -3,6 +3,7 @@
     <hr>
     <br>
     <form @submit.prevent="signUp">
+        <div v-if="error" class="error">{{error}}</div>
         <input type="text" placeholder="User Name" v-model="userName">
         <input type="text" placeholder="Email" v-model="email">
         <input type="password" placeholder="Password" v-model="password">
@@ -22,10 +23,12 @@ export default {
         let {error,createAccount} = useSignUp()
         let signUp = async()=>{
             let res = await createAccount(email.value,password.value,userName.value);
-            console.log(res.user)
+            if  (res){
+                console.log(res.user);
+            }
         }
 
-        return {userName,email,password,signUp}
+        return {userName,email,password,signUp,error}
     }
 }
 </script>
