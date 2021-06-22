@@ -3,6 +3,7 @@
     <hr>
     <br>
     <form @submit.prevent="login">
+        <div v-if="error" class="error">{{error}}</div>
         <input type="text" placeholder="Email" v-model="email">
         <input type="password" placeholder="Password" v-model="password">
         <button>Login</button>
@@ -11,16 +12,23 @@
 
 <script>
 import { ref } from '@vue/reactivity'
+import userLogin from '../composables/useLogin'
+
 export default {
     setup(){
         let email = ref("");
         let password = ref("");
 
-        let login = ()=>{
-            console.log(email.value,password.value)
+        let {error,signin} = userLogin();
+
+        let login = async()=>{
+            let res = await signin(email.value,password.value);
+            if(res){
+                console.log(res.user)
+            }
         }
 
-        return {email,password,login}
+        return {email,password,login,error}
     }
 }
 </script>
