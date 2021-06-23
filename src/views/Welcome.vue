@@ -2,11 +2,11 @@
     <h1>Welcome From Future Chat App!</h1>
     <div class="welcome container">
         <div v-if="showLoginForm">
-            <Login></Login>
+            <Login @enterChatroom="enterChatroom"></Login>
             <p>Not a member? <span @click="showLoginForm=!showLoginForm">Create account?</span></p>
         </div>
         <div v-else>
-            <Singup></Singup>
+            <Singup @enterChatroom = "enterChatroom"></Singup>
             <p>Already a member? <span @click="showLoginForm=!showLoginForm">Login account?</span></p>
         </div>
     </div>
@@ -17,14 +17,18 @@
 import { ref } from '@vue/reactivity'
 import Login from '../components/Login'
 import Singup from '../components/Singup'
+import {useRouter} from 'vue-router'
 export default {
   components: {
     Login, Singup 
     },
     setup(){
         let showLoginForm = ref(true);
-
-        return {showLoginForm}
+        let router = useRouter();
+        let enterChatroom = ()=>{
+            router.push({name:"Chatroom"})
+        }
+        return {showLoginForm,enterChatroom}
     }
 
 }

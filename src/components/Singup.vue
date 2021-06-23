@@ -14,8 +14,9 @@
 <script>
 import { ref } from '@vue/reactivity'
 import useSignUp from '../composables/useSignup'
+
 export default {
-    setup(){
+    setup(props,context){
         let userName = ref("");
         let email = ref("");
         let password = ref("");
@@ -24,7 +25,7 @@ export default {
         let signUp = async()=>{
             let res = await createAccount(email.value,password.value,userName.value);
             if  (res){
-                console.log(res.user);
+                context.emit("enterChatroom");
             }
         }
 

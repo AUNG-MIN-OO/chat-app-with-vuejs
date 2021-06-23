@@ -15,7 +15,7 @@ import { ref } from '@vue/reactivity'
 import userLogin from '../composables/useLogin'
 
 export default {
-    setup(){
+    setup(props,context){
         let email = ref("");
         let password = ref("");
 
@@ -24,7 +24,7 @@ export default {
         let login = async()=>{
             let res = await signin(email.value,password.value);
             if(res){
-                console.log(res.user)
+                context.emit("enterChatroom")
             }
         }
 
