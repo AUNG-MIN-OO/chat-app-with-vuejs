@@ -1,12 +1,14 @@
 <template>
-    <form>
-        <textarea 
+    <form @submit.prevent="">
+        <!-- <textarea 
             placeholder="Type a message to send" autofocus
             v-model="message"
             @keypress.enter="handleSubmit"
         >
-
-        </textarea>
+        </textarea> -->
+        <input type="text" placeholder="Type a message to send" autofocus
+            v-model="message"
+            @keypress.enter="handleSubmit">
     </form>
 </template>
 
@@ -28,26 +30,31 @@ export default {
                 created_at:timestamp()
             }
             await addDoc(chat);
+            console.log(chat);
             message.value="";
+            console.log("message sent")
+            console.log(error)
         }
+
 
         return { message,handleSubmit };
     }
 }
 </script>
 
-<style>
+<style scoped>
 form {
     margin: 10px;
 }
-form textarea{
+form input{
+    margin-bottom: 7px;
     width: 98%;
-    height: 40px;
-    padding: 10px;
+    /* height: 40px; */
+    padding: 20px 10px;
     border: none;
-    border-radius: 0 0 20px 20px;
+    border-radius: 20px;
     outline: none;
-    background-color: #faee1c;
+    background-color: #e2d824;
     font-size: 16px;
 }
 </style>

@@ -1,13 +1,15 @@
 <template>
-    <h1>i am chatroom</h1>
+    <!-- <h1>i am chatroom</h1> -->
     <div class="container">
         <Navbar></Navbar>
         <hr>
+        <ChatWindow></ChatWindow>
         <ChatForm></ChatForm>
     </div>
 </template>
 
 <script>
+import ChatWindow from '../components/ChatWindow'
 import ChatForm from '../components/ChatForm'
 import { watch } from '@vue/runtime-core'
 import Navbar from '../components/Navbar'
@@ -16,6 +18,7 @@ import {useRouter} from 'vue-router'
 
 export default {
   components: {
+    ChatWindow,
     ChatForm, Navbar },
   setup(){
     let {user} = getUser();
@@ -29,7 +32,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   hr{
     margin: 0 16px;
   }
