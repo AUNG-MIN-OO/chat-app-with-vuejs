@@ -30,10 +30,7 @@ export default {
                 created_at:timestamp()
             }
             await addDoc(chat);
-            console.log(chat);
             message.value="";
-            console.log("message sent")
-            console.log(error)
         }
 
 
