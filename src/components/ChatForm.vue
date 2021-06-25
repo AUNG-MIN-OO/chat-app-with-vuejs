@@ -1,7 +1,7 @@
 <template>
     <form>
         <textarea 
-            cols="30" rows="10" placeholder="Type a message to send" autofocus
+            placeholder="Type a message to send" autofocus
             v-model="message"
             @keypress.enter="handleSubmit"
         >
@@ -14,18 +14,20 @@
 import { ref } from '@vue/reactivity'
 import getUser from '../composables/getUser'
 import {timestamp} from '../firebase/config'
+import useCollection from '../composables/useCollection'
 
 export default {
     setup(){
         let message = ref("");
         let {user} = getUser();
-        let handleSubmit = ()=>{
+        let {error,addDoc} = useCollection("messages");
+        let handleSubmit = async()=>{
             let chat ={
                 message:message.value,
                 name:user.value.displayName,
                 created_at:timestamp()
             }
-            console.log(chat);
+            await addDoc(chat);
             message.value="";
         }
 
@@ -40,7 +42,7 @@ form {
 }
 form textarea{
     width: 98%;
-    height: 20px;
+    height: 40px;
     padding: 10px;
     border: none;
     border-radius: 0 0 20px 20px;

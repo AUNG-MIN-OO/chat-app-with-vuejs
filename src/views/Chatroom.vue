@@ -2,6 +2,7 @@
     <h1>i am chatroom</h1>
     <div class="container">
         <Navbar></Navbar>
+        <hr>
         <ChatForm></ChatForm>
     </div>
 </template>
@@ -29,5 +30,7 @@ export default {
 </script>
 
 <style>
-
+  hr{
+    margin: 0 16px;
+  }
 </style>
