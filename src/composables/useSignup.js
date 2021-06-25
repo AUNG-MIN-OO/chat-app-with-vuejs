@@ -2,13 +2,13 @@ import { ref } from "vue";
 import { auth } from '../firebase/config'
 
 let error   = ref(null);
-let createAccount = async(email,password,userName)=>{
+let createAccount = async(email,password,displayName)=>{
     try{
         let res = await auth.createUserWithEmailAndPassword(email,password)
         if(!res){
             throw new Error("Coundn't create a new user")
         }
-        res.user.updateProfile({userName}) //userName:userName
+        res.user.updateProfile({displayName}) //userName:userName
         return res;
     }catch(err){
         error.value = err.message;
