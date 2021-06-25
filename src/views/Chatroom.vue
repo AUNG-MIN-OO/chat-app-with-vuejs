@@ -3,7 +3,7 @@
     <div class="container">
         <Navbar></Navbar>
         <hr>
-        <ChatWindow></ChatWindow>
+        <ChatWindow :user="user"></ChatWindow>
         <ChatForm></ChatForm>
     </div>
 </template>
@@ -28,6 +28,7 @@ export default {
         router.push("/");
       }
     })
+    return {user};
   }
 }
 </script>
