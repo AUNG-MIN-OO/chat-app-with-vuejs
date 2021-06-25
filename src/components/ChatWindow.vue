@@ -1,23 +1,34 @@
 <template>
     <div class="chat-window">
-        <div class="messages">
+        <div class="messages" v-for="message in messages" :key="message.id">
             <div class="single">
-                <span class="created-at">10:22 PM</span>
-                <span class="name">AMO</span>
-                <span class="message">Hi</span>
-            </div>
-            <div class="single">
-                <span class="created-at">10:22 PM</span>
-                <span class="name">AMO</span>
-                <span class="message">I am AMO</span>
+                <span class="created-at">{{message.timestamp}}</span>
+                <span class="name">{{message.name}}</span>
+                <span class="message">{{message.message}}</span>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-export default {
+import { ref } from '@vue/reactivity'
+import {db} from '../firebase/config'
 
+export default {
+    setup(){
+        let messages = ref([]);
+
+        db.collection("messages").orderBy("created_at").onSnapshot((snap)=>{
+            let results = [];
+            snap.docs.forEach((doc)=>{
+                let document = {...doc.data(),id:doc.id};
+                results.push(document);
+            })
+            messages.value = results;
+        })
+
+        return {messages};
+    }
 }
 </script>
 
@@ -25,6 +36,11 @@ export default {
     .chat-window {
         /* background: #cfc519; */
         padding: 30px 20px;
+        max-height: 350px;
+        overflow: auto;
+    }
+    .chat-window::-webkit-scrollbar{
+        width: 0;
     }
     .single {
     margin: 18px 0;
