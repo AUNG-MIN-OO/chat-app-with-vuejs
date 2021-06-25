@@ -1,7 +1,7 @@
 <template>
     <nav v-if="user">
         <div>
-            <p>Hi  <b>{{ user.displayName }}</b> !!!</p>
+            <h2>Hi  <b>{{ user.displayName }}</b> !!!</h2>
             <p class="email">logged in as <b>{{ user.email }}</b></p>
         </div>
         <button @click="logout">Logout</button>
@@ -28,6 +28,9 @@ export default {
 </script>
 
 <style>
+h2{
+    margin-bottom: 0;
+}
 nav{
     display: flex;
     justify-content: space-between;
